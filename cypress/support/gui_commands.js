@@ -44,3 +44,12 @@ Cypress.Commands.add('gui_createProject', project => {
   cy.get('.qa-initialize-with-readme-checkbox').check()
   cy.contains('Create project').click()
 })
+
+
+Cypress.Commands.add('gui_createIssue', issue => {
+  cy.visit(`${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${issue.name_project}/issues/new`)
+
+  cy.get('#issue_title').type(issue.title) 
+  cy.get('#issue_description').type(issue.description)
+  cy.get("input[name='commit']").click()
+})
