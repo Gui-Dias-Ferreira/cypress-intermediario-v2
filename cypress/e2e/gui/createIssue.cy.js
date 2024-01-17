@@ -1,23 +1,27 @@
 import { faker } from '@faker-js/faker'
 
 describe('Create Issue', () => {
+  const issue = {
+    title: `issue-${faker.datatype.uuid()}`,
+    description: faker.random.words(3),
+    project: { 
+      name: `project-${faker.datatype.uuid()}`,
+      description: faker.random.words(5)
+    }
+  }
+
   beforeEach(() => {
+    cy.api_deleteProjects()
     cy.login()
+    cy.gui_createProject(issue.project) 
   })
 
   it('successfully', () => {
-    const issue = {
-        name_project: "project-33a2ac5a-8fe2-4bec-bd91-9814d8c9be0c",
-        title: faker.random.words(5),
-        description: faker.random.words(5)
-    }
+    cy.gui_createIssue(issue) 
 
-    cy.gui_createIssue(issue)
-
-    
-    cy.get('.detail-page-description')
-        .should('contain', issue.title)
-        .and('contain', issue.description)
+    cy.get('.issue-details')
+      .should('contain', issue.title)
+      .and('contain', issue.description)
   })
 })
 
@@ -29,19 +33,20 @@ describe('Create Issue', () => {
   const issue = {
     title: `issue-${faker.datatype.uuid()}`,
     description: faker.random.words(3),
-    project: { AQUI ELE CRIOU UM NOVO PROJETO, EU USEI UM PROJETO JÁ CRIADO
+    project: { 
       name: `project-${faker.datatype.uuid()}`,
       description: faker.random.words(5)
     }
   }
 
   beforeEach(() => {
+    cy.api_deleteProjects()
     cy.login()
-    cy.gui_createProject(issue.project) CRIOU PROJETO
+    cy.gui_createProject(issue.project) 
   })
 
   it('successfully', () => {
-    cy.gui_createIssue(issue) CRIOU A ISSUE PARA O PROJETO
+    cy.gui_createIssue(issue) 
 
     cy.get('.issue-details')
       .should('contain', issue.title)
