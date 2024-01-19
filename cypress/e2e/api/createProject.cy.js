@@ -1,7 +1,10 @@
 import { faker } from '@faker-js/faker'
 
 describe('Create Project', () => {
-    beforeEach(() => cy.api_deleteProjects())
+    beforeEach(
+        () => cy.api_deleteProjects() //vai deletar tds os projetos antes de criar um novo projeto.
+    )
+
     it('successfully', () => {
         const project = {
         name: `project-${faker.datatype.uuid()}`,
