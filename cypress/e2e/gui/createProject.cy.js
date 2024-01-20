@@ -1,7 +1,9 @@
 //Faker gera dados aleatórios
 import { faker } from '@faker-js/faker'
 
-describe('Create Project', () => {
+const options = { env: { snapshotOnly: true } }
+
+describe('Create Project', options, () => {
   beforeEach(() => {
     cy.api_deleteProjects()
     cy.login()
