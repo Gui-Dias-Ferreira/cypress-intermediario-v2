@@ -1,8 +1,13 @@
 describe("Login", () => {
   it("successfully", () => {
-    cy.login();
+    const user = Cypress.env('user_name')
+    const password = Cypress.env('user_password')
+    const options = { cacheSession: false }
 
-    cy.get(".qa-user-avatar").should("be.visible");
+    cy.login(user, password, options)
+
+    cy.get('.qa-user-avatar').should('be.visible')
+  
 
     // cy.visit('/')
     // cy.get('[data-qa-selector = "login_field"]')
