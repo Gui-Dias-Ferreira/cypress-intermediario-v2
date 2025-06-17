@@ -60,4 +60,12 @@ Cypress.Commands.add('api_createLabel', (projectId, label) => {
   })
 })
 
+Cypress.Commands.add('api_createMilestone', (projectId, milestone) => {
+  cy.request({
+    method: 'POST',
+    url: `/api/v4/projects/${projectId}/milestones`,
+    body: { title: milestone.title },
+    headers: { Authorization: accessToken },
+  })
+})
 //Para efeitos de estudo, realizando uma requisição para uma api qualquer.
