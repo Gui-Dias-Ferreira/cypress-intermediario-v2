@@ -9,10 +9,24 @@ Cypress.Commands.add('api_createProject', project => {
       description: project.description,
       initialize_with_readme: true
     },
-    headers: { Authorization: accessToken }
+    headers: { Authorization: accessToken },
   })
 })
 
+Cypress.Commands.add('api_createIssue', issue => {
+  cy.api_createProject(issue.project)
+    .then(response => {
+      cy.request({
+        method: 'POST',
+        url: `/api/v4/projects/${response.body.id}/issues`,
+        body: {
+          title: issue.title,
+          description: issue.description
+        },
+        headers: { Authorization: accessToken },
+      })
+  })
+})
 
 // Pega todos os projetos JÁ criados.
 Cypress.Commands.add('api_getAllProjects', () => {
@@ -34,22 +48,6 @@ Cypress.Commands.add('api_deleteProjects', () => {
     )
 })
 
-
-Cypress.Commands.add('api_createIssue', issue => {
-cy.api_createProject(issue.project)
-    .then(response => {
-      cy.request({
-        method: 'POST',
-        url: `/api/v4/projects/${response.body.id}/issues`,
-        body: {
-          title: issue.title,
-          description: issue.description
-        },
-        headers: { Authorization: accessToken },
-      })
-  })
-})
-
 Cypress.Commands.add('api_createLabel', (projectId, label) => {
   cy.request({
     method: 'POST',
@@ -61,3 +59,5 @@ Cypress.Commands.add('api_createLabel', (projectId, label) => {
     headers: { Authorization: accessToken },
   })
 })
+
+//Para efeitos de estudo, realizando uma requisição para uma api qualquer.

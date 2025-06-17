@@ -18,5 +18,7 @@ import './api_commands'
 
 import './gui_commands'
 
+import 'cypress-plugin-api'
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
