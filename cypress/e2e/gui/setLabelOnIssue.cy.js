@@ -36,7 +36,7 @@ describe('Set label on issue', options, () => {
   })
 })
 
-// Meu exercicio, porém não fiz conforme o curso
+// Meu exercicio, porém não fiz conforme o
 // import {faker} from '@faker-js/faker';
 
 
